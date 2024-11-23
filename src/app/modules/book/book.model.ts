@@ -11,8 +11,8 @@ const bookSchema = new Schema<Book>(
       validate: {
         validator: function (value: string) {
           return (
-            /^[A-Za-z0-9]+(?:[-\s][A-Za-z0-9]+)*$/.test(value) &&
-            !/[a-z]{2,}[A-Z]/.test(value)
+            /^[A-Z0-9][A-Za-z0-9\s-]*$/.test(value) &&
+            !/[a-z]+[A-Z]/.test(value)
           );
         },
         message:
