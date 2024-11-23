@@ -18,4 +18,7 @@ app.get("/", (req, res) => {
         message: "Server is Live ⚡",
     });
 });
+app.all("*", (req, res) => {
+    res.status(404).json({ error: "API endpoint not found" });
+});
 exports.default = app;

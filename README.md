@@ -23,37 +23,37 @@ Developed an Express application with TypeScript, integrating MongoDB with Mongo
 
 ## API endpoints and methods
 
-## 1. Create a Book
+1. Create a Book
 
 - **Endpoint:** **`/api/products`**
 - **Method:** `POST`
 
-## 2. Get All Books
+2. Get All Books
 
 - **Endpoint:** **`/api/products`**
 - **Method:** `GET`
 
-## 3. Get a Specific Book
+3. Get a Specific Book
 
 - **Endpoint:** **`/api/products/:productId`**
 - **Method:** `GET`
 
-## 4. Update a Book
+4. Update a Book
 
 - **Endpoint:** **`/api/products/:productId`**
 - **Method:** `PUT`
 
-## 5. Delete a Book
+5. Delete a Book
 
 - **Endpoint:** **`/api/products/:productId`**
 - **Method:** `DELETE`
 
-## 6. Order a Book
+6. Order a Book
 
 - **Endpoint:** **`/api/orders`**
 - **Method:** `POST`
 
-## 7. Calculate Revenue from Orders (Aggregation)
+7. Calculate Revenue from Orders (Aggregation)
 
 - **Endpoint:** **`/api/orders/revenue`**
 - **Method:** `GET`
