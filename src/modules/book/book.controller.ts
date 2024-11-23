@@ -11,10 +11,11 @@ const createBook = async (req: Request, res: Response) => {
       data: result,
     });
   } catch (error) {
-    res.status(500).json({
+    res.status(400).json({
       message: "Book could not be created",
       success: false,
       error: error,
+      stack: (error as Error).stack,
     });
   }
 };
@@ -29,10 +30,11 @@ const getBooks = async (req: Request, res: Response) => {
       data: result,
     });
   } catch (error) {
-    res.status(500).json({
+    res.status(404).json({
       message: "Books could not be retrieved",
       success: false,
       error: error,
+      stack: (error as Error).stack,
     });
   }
 };
@@ -47,10 +49,50 @@ const getABook = async (req: Request, res: Response) => {
       data: result,
     });
   } catch (error) {
-    res.status(500).json({
-      message: "Books could not be retrieved",
+    res.status(404).json({
+      message: "Book could not be retrieved",
       success: false,
       error: error,
+      stack: (error as Error).stack,
+    });
+  }
+};
+
+const updateBook = async (req: Request, res: Response) => {
+  try {
+    const bookId = req.params.productId;
+    const { book: bookData } = req.body;
+    const result = await BookService.updateABookInDB(bookId, bookData);
+    res.status(200).json({
+      message: "Book updated successfully",
+      status: true,
+      data: result,
+    });
+  } catch (error) {
+    res.status(400).json({
+      message: "Book was not updated",
+      success: false,
+      error: error,
+      stack: (error as Error).stack,
+    });
+  }
+};
+
+const deleteBook = async (req: Request, res: Response) => {
+  try {
+    const bookId = req.params.productId;
+    await BookService.deleteABookInDB(bookId);
+    res.status(200).json({
+      message: "Book deleted successfully",
+      status: true,
+      data: {},
+    });
+  } catch (error) {
+    res.status(400).json({
+      message: "Book was not deleted",
+      success: false,
+      error: error,
+      stack: (error as Error).stack,
     });
   }
 };
@@ -59,4 +101,6 @@ export const BookController = {
   createBook,
   getBooks,
   getABook,
+  updateBook,
+  deleteBook,
 };

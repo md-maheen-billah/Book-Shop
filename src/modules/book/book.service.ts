@@ -29,8 +29,22 @@ const getABookFromDB = async (id: string) => {
   return result;
 };
 
+const updateABookInDB = async (id: string, book: Book) => {
+  const result = await BookModel.findByIdAndUpdate(id, book, {
+    new: true,
+  });
+  return result;
+};
+
+const deleteABookInDB = async (id: string) => {
+  const result = await BookModel.findByIdAndDelete(id);
+  return result;
+};
+
 export const BookService = {
   createBookIntoDB,
   getBooksFromDB,
   getABookFromDB,
+  updateABookInDB,
+  deleteABookInDB,
 };
