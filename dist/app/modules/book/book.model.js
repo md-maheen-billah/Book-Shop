@@ -9,7 +9,8 @@ const bookSchema = new mongoose_1.Schema({
         unique: true,
         validate: {
             validator: function (value) {
-                return /^[A-Za-z0-9]+(?:[-\s][A-Za-z0-9]+)*$/.test(value);
+                return (/^[A-Za-z0-9]+(?:[-\s][A-Za-z0-9]+)*$/.test(value) &&
+                    !/[a-z]{2,}[A-Z]/.test(value));
             },
             message: "Title must only contain words starting with uppercase letters, and no mixed-case formatting is allowed.",
         },
