@@ -3,14 +3,44 @@ import { Book } from "./book.interface";
 
 const bookSchema = new Schema<Book>(
   {
-    title: { type: String, required: [true, "Please enter a title"] },
+    title: {
+      type: String,
+      trim: true,
+      required: [true, "Please enter a title"],
+      unique: true,
+      validate: {
+        validator: function (value: string) {
+          return /^(?:\d+(\s?\d+|-\d+)|[A-Z]\. [A-Z][a-z]*|\d+ [A-Z]\. [A-Z][a-z]*)$/.test(
+            value
+          );
+        },
+        message:
+          "Title must only contain words starting with uppercase letters, and no mixed-case formatting is allowed.",
+      },
+    },
     author: {
       type: String,
+      trim: true,
       required: [true, "Please enter name of the author"],
+      validate: {
+        validator: function (value: string) {
+          return /^([A-Z][a-z]*)( [A-Z][a-z]*)*$/.test(value);
+        },
+        message:
+          "Author name must only contain words starting with uppercase letters, and no mixed-case formatting is allowed.",
+      },
     },
     price: {
       type: Number,
+      trim: true,
       required: [true, "Please enter the price of the book"],
+      validate: {
+        validator: function (value: number) {
+          return value > 0;
+        },
+        message:
+          "Price must be a positive number and cannot be zero or negative",
+      },
     },
     category: {
       type: String,
@@ -40,7 +70,15 @@ const bookSchema = new Schema<Book>(
     },
     quantity: {
       type: Number,
+      trim: true,
       required: [true, "Please enter the quantity of the book"],
+      validate: {
+        validator: function (value: number) {
+          return Number.isInteger(value) && value >= 0;
+        },
+        message:
+          "Quantity must be a positive number and cannot be zero or negative or a decimal",
+      },
     },
     inStock: {
       type: Boolean,

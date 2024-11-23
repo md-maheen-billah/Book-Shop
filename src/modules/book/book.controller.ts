@@ -43,6 +43,15 @@ const getABook = async (req: Request, res: Response) => {
   try {
     const bookId = req.params.productId;
     const result = await BookService.getABookFromDB(bookId);
+
+    if (!result) {
+      res.status(404).json({
+        message: "Book not found",
+        success: false,
+      });
+      return;
+    }
+
     res.status(200).json({
       message: "Book retrieved successfully",
       status: true,
@@ -63,6 +72,15 @@ const updateBook = async (req: Request, res: Response) => {
     const bookId = req.params.productId;
     const { book: bookData } = req.body;
     const result = await BookService.updateABookInDB(bookId, bookData);
+
+    if (!result) {
+      res.status(404).json({
+        message: "Book to be updated not found",
+        success: false,
+      });
+      return;
+    }
+
     res.status(200).json({
       message: "Book updated successfully",
       status: true,
@@ -81,6 +99,16 @@ const updateBook = async (req: Request, res: Response) => {
 const deleteBook = async (req: Request, res: Response) => {
   try {
     const bookId = req.params.productId;
+
+    const result = await BookService.getABookFromDB(bookId);
+
+    if (!result) {
+      res.status(404).json({
+        message: "Book to be deleted not found",
+        success: false,
+      });
+      return;
+    }
     await BookService.deleteABookInDB(bookId);
     res.status(200).json({
       message: "Book deleted successfully",
