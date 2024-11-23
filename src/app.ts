@@ -17,4 +17,8 @@ app.get("/", (req: Request, res: Response) => {
   });
 });
 
+app.all("*", (req: Request, res: Response) => {
+  res.status(404).json({ error: "API endpoint not found" });
+});
+
 export default app;
