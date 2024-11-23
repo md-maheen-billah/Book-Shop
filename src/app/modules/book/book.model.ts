@@ -10,7 +10,7 @@ const bookSchema = new Schema<Book>(
       unique: true,
       validate: {
         validator: function (value: string) {
-          return /^(?:\d+(\s?\d+|-\d+)|[A-Z]\. [A-Z][a-z]*|\d+ [A-Z]\. [A-Z][a-z]*)$/.test(
+          return /^(?:\d+(?:[-\s]?[A-Za-z]+)+|[A-Z][a-z]*(?:\s[A-Za-z]+)*)$/.test(
             value
           );
         },
