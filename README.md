@@ -1,4 +1,4 @@
-# Assignment 2 - Book-Shop
+# Book-Shop
 
 Developed an Express application with TypeScript, integrating MongoDB with Mongoose to manage a Book Store. Ensured data integrity using Mongoose schema validation.
 
