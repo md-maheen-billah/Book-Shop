@@ -10,9 +10,7 @@ const bookSchema = new Schema<Book>(
       unique: true,
       validate: {
         validator: function (value: string) {
-          return /^(?:\d+(?:[-\s]?[A-Za-z]+)+|[A-Z][a-z]*(?:\s[A-Za-z]+)*)$/.test(
-            value
-          );
+          return /^[A-Za-z0-9]+(?:[-\s][A-Za-z0-9]+)*$/.test(value);
         },
         message:
           "Title must only contain words starting with uppercase letters, and no mixed-case formatting is allowed.",
