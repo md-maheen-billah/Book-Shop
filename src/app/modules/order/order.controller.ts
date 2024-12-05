@@ -4,7 +4,7 @@ import BookModel from "../book/book.model";
 
 const createOrder = async (req: Request, res: Response) => {
   try {
-    const { order: orderData } = req.body;
+    const orderData = req.body;
     const book = await BookModel.findById(orderData.product);
     if (!book) {
       res.status(404).json({

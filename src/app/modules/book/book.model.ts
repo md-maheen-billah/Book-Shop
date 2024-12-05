@@ -25,7 +25,7 @@ const bookSchema = new Schema<Book>(
       required: [true, "Please enter name of the author"],
       validate: {
         validator: function (value: string) {
-          return /^([A-Z][a-z]*)( [A-Z][a-z]*)*$/.test(value);
+          return /^([A-Z][a-z.-]*)( [A-Z][a-z.-]*)*$/.test(value);
         },
         message:
           "Author name must only contain words starting with uppercase letters, and no mixed-case formatting is allowed.",

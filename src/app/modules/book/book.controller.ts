@@ -3,8 +3,17 @@ import { BookService } from "./book.service";
 
 const createBook = async (req: Request, res: Response) => {
   try {
-    const { book: bookData } = req.body;
-    const result = await BookService.createBookIntoDB(bookData);
+    const { title, author, price, category, description, quantity, inStock } =
+      req.body;
+    const result = await BookService.createBookIntoDB({
+      title,
+      author,
+      price,
+      category,
+      description,
+      quantity,
+      inStock,
+    });
     res.status(200).json({
       message: "Book created successfully",
       success: true,
@@ -70,7 +79,7 @@ const getABook = async (req: Request, res: Response) => {
 const updateBook = async (req: Request, res: Response) => {
   try {
     const bookId = req.params.productId;
-    const { book: bookData } = req.body;
+    const bookData = req.body;
     const result = await BookService.updateABookInDB(bookId, bookData);
 
     if (!result) {
