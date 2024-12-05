@@ -13,8 +13,16 @@ exports.BookController = void 0;
 const book_service_1 = require("./book.service");
 const createBook = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { book: bookData } = req.body;
-        const result = yield book_service_1.BookService.createBookIntoDB(bookData);
+        const { title, author, price, category, description, quantity, inStock } = req.body;
+        const result = yield book_service_1.BookService.createBookIntoDB({
+            title,
+            author,
+            price,
+            category,
+            description,
+            quantity,
+            inStock,
+        });
         res.status(200).json({
             message: "Book created successfully",
             success: true,
@@ -78,7 +86,7 @@ const getABook = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 const updateBook = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const bookId = req.params.productId;
-        const { book: bookData } = req.body;
+        const bookData = req.body;
         const result = yield book_service_1.BookService.updateABookInDB(bookId, bookData);
         if (!result) {
             res.status(404).json({

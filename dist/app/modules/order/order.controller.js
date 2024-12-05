@@ -17,7 +17,7 @@ const order_service_1 = require("./order.service");
 const book_model_1 = __importDefault(require("../book/book.model"));
 const createOrder = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { order: orderData } = req.body;
+        const orderData = req.body;
         const book = yield book_model_1.default.findById(orderData.product);
         if (!book) {
             res.status(404).json({
